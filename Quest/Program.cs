@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Windows;
 // Every class in the program is defined within the "Quest" namespace
 // Classes within the same namespace refer to one another without a "using" statement
 namespace Quest
@@ -9,8 +9,9 @@ namespace Quest
     {
         static void Main(string[] args)
         {
+            
 
-            Console.WriteLine("Hye Adventurer, what is your name?");
+            Console.WriteLine("Hey Adventurer, what is your name?");
             string userName = Console.ReadLine();
             // Create a few challenges for our Adventurer's quest
             // The "Challenge" Constructor takes three arguments
@@ -36,6 +37,7 @@ namespace Quest
 ",
                 4, 20
             );
+            
 
             // "Awesomeness" is like our Adventurer's current "score"
             // A higher Awesomeness is better
@@ -60,25 +62,44 @@ namespace Quest
                 favoriteBeatle
             };
 
+            AdventurerGame();
             // Loop through all the challenges and subject the Adventurer to them
-            foreach (Challenge challenge in challenges)
-            {
-                challenge.RunChallenge(theAdventurer);
-            }
+            Console.WriteLine("would you like to go on the Quest again? Y/N");
+            string startQuestOver = Console.ReadLine().ToLower();
+            bool startOver = startQuestOver == "y";
 
-            // This code examines how Awesome the Adventurer is after completing the challenges
-            // And praises or humiliates them accordingly
-            if (theAdventurer.Awesomeness >= maxAwesomeness)
+            if (startOver)
             {
-                Console.WriteLine("YOU DID IT! You are truly awesome!");
-            }
-            else if (theAdventurer.Awesomeness <= minAwesomeness)
-            {
-                Console.WriteLine("Get out of my sight. Your lack of awesomeness offends me!");
+                Console.WriteLine("Okay, let's take it from the top!");
+
+                AdventurerGame();
             }
             else
             {
-                Console.WriteLine("I guess you did...ok? ...sorta. Still, you should get out of my sight.");
+                Console.WriteLine("Good, you suck anyway. BYE FELICIA!");
+            }
+            void AdventurerGame()
+            {
+            
+                foreach (Challenge challenge in challenges)
+                {
+                    challenge.RunChallenge(theAdventurer);
+                }
+
+                // This code examines how Awesome the Adventurer is after completing the challenges
+                // And praises or humiliates them accordingly
+                if (theAdventurer.Awesomeness >= maxAwesomeness)
+                {
+                    Console.WriteLine("YOU DID IT! You are truly awesome!");
+                }
+                else if (theAdventurer.Awesomeness <= minAwesomeness)
+                {
+                    Console.WriteLine("Get out of my sight. Your lack of awesomeness offends me!");
+                }
+                else
+                {
+                    Console.WriteLine("I guess you did...ok? ...sorta. Still, you should get out of my sight.");
+                }
             }
         }
     }
